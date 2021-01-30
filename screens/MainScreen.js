@@ -5,7 +5,7 @@ import Button from '../components/Button';
 import Items from '../components/Items';
 
 const MainScreen = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(undefined);
   const [data, setData] = useState([]);
 
   return (
