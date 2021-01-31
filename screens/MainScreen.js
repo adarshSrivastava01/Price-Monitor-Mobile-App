@@ -17,7 +17,7 @@ const MainScreen = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log("Button Pressed");
+        console.log('Button Pressed');
         console.log(data);
         let recievedData = [];
         // data.map(each => {
@@ -26,15 +26,15 @@ const MainScreen = () => {
         //     price: each.price
         //   })
         // });
-        for(let i=0; i<data.length - 1; i++) {
+        for (let i = 0; i < data.length - 1; i++) {
           console.log(data[i]);
           recievedData.push(data[i]);
-          console.log("Done 1");
+          console.log('Done 1');
         }
         setData(recievedData);
-        console.log("------", recievedData);
+        console.log('------', recievedData);
       })
-      .catch(err => setError(err.message));
+      .catch((err) => setError(err.message));
     console.log('Ending');
   };
 
@@ -50,10 +50,13 @@ const MainScreen = () => {
           }}>
           Enter Product Name
         </Text>
-      </View>  
+      </View>
       <TextInput
         placeholder="Enter Name"
-        onChange={(text) => setName(text)}
+        onChange={(text) => {
+          console.log(text);
+          setName(text);
+        }}
         autoCompleteType="name"
         autoFocus={true}
         textContentType="name"
