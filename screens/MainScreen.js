@@ -5,8 +5,38 @@ import Button from '../components/Button';
 import Items from '../components/Items';
 
 const MainScreen = () => {
-  const [name, setName] = useState(undefined);
+  const [name, setName] = useState('');
   const [data, setData] = useState([]);
+  const [error, setError] = useState('');
+
+  const loadData = () => {
+    console.log('Starting');
+    console.log(name);
+    fetch(
+      `https://monitor2709.herokuapp.com/info?item=iphone&shops=flipkart,snapdeal`,
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Button Pressed");
+        console.log(data);
+        let recievedData = [];
+        // data.map(each => {
+        //   recievedData.push({
+        //     name: each.name,
+        //     price: each.price
+        //   })
+        // });
+        for(let i=0; i<data.length - 1; i++) {
+          console.log(data[i]);
+          recievedData.push(data[i]);
+          console.log("Done 1");
+        }
+        setData(recievedData);
+        console.log("------", recievedData);
+      })
+      .catch(err => setError(err.message));
+    console.log('Ending');
+  };
 
   return (
     <View style={styles.inputView}>
@@ -20,7 +50,7 @@ const MainScreen = () => {
           }}>
           Enter Product Name
         </Text>
-      </View>
+      </View>  
       <TextInput
         placeholder="Enter Name"
         onChange={(text) => setName(text)}
@@ -31,11 +61,9 @@ const MainScreen = () => {
         style={joinInputName}
         placeholderTextColor={'#aaa'}
       />
-      <Button title="Search" />
+      <Button title="Search" click={loadData} />
       <ScrollView style={{marginTop: 35}}>
-        <View>
-          <Items />
-        </View>
+        <View>{data.length !== 0 && <Items dataItems={data} />}</View>
       </ScrollView>
     </View>
   );
@@ -58,7 +86,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     letterSpacing: 1,
-    borderRadius: 25
+    borderRadius: 25,
   },
 });
 

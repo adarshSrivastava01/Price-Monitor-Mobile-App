@@ -9,39 +9,6 @@ import {
 } from 'react-native';
 import Flipkart from '../assets/images/flipkart.jpg';
 
-const items = [
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Item 1',
-    price: '$999',
-    id: 'A11',
-  },
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Item 2',
-    price: '$222',
-    id: 'A12',
-  },
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Item 3',
-    price: '$111',
-    id: 'A13',
-  },
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Item 3',
-    price: '$111',
-    id: 'A16',
-  },
-  {
-    image: 'https://picsum.photos/200',
-    name: 'Item 3',
-    price: '$111',
-    id: 'A17',
-  },
-];
-
 const Items = (props) => {
   const renderItem = ({item, index}) => {
     return (
@@ -52,7 +19,8 @@ const Items = (props) => {
           marginRight: 15,
           borderRadius: 10,
           backgroundColor: '#F96D41',
-          padding: 10
+          padding: 10,
+          width: '80%',
         }}
         onPress={() => console.log('My Item')}>
         <Image
@@ -68,12 +36,22 @@ const Items = (props) => {
           }}>
           <View
             style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-            <Text style={{marginLeft: 5, fontSize: 24, color: '#fff', fontWeight: 'bold'}}>
-              {item.name}
-            </Text>
-            <Text style={{marginLeft: 5, fontSize: 18, color: '#fff'}}>
-              {item.price}
-            </Text>
+            <View>
+              <Text
+                style={{
+                  marginLeft: 5,
+                  fontSize: 24,
+                  color: '#fff',
+                  fontWeight: 'bold',
+                }}>
+                {item.name}
+              </Text>
+            </View>
+            <View>
+              <Text style={{marginLeft: 5, fontSize: 18, color: '#fff'}}>
+                {item.price}
+              </Text>
+            </View>
           </View>
         </View>
       </TouchableOpacity>
@@ -87,9 +65,9 @@ const Items = (props) => {
       </View>
       <View style={styles.items}>
         <FlatList
-          data={items}
+          data={props.dataItems}
           renderItem={renderItem}
-          keyExtractor={(item) => `${item.id}`}
+          keyExtractor={(item) => `${item.name}`}
           horizontal
           showsHorizontalScrollIndicator={false}
         />
@@ -108,7 +86,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 15,
     backgroundColor: '#25282f',
-    paddingVertical: 10
+    paddingVertical: 10,
   },
 });
 
